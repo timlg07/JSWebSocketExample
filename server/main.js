@@ -2,6 +2,7 @@ const http = require('http')
 const ws = require('ws')
 
 const wss = new ws.Server({ noServer: true })
+const clients = []
 
 function accept(req, res) {
     const isWebsocket = req.headers.upgrade.toLowerCase() === 'websocket'
@@ -14,13 +15,16 @@ function accept(req, res) {
     }
 }
 
-function onConnect(ws) {
-    ws.on('message', message => {
-        ws.send(message);
+function onConnect(wsc, ireq) {
+    clients.push(wsc)
+    wsc.on('message', message => {
+        distributeMessage(message)
         console.log(message)
-
-        // setTimeout(() => ws.close(1000, "Bye!"), 5000)
     })
+}
+
+function distributeMessage(message) {
+    clients.forEach(c => void c.send(message))
 }
 
 if (!module.parent) {
