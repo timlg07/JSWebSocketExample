@@ -3,8 +3,7 @@ let socket = new WebSocket('ws://localhost:8080')
 socket.onopen = event => {
     renderMessage('[open] Connection established')
     renderMessage('Sending to server')
-    let name = prompt('Username: ') || 'Anonymous'
-    sendMessage(`${name} joined the chat.`)
+    sendMessage(`${username} joined the chat.`)
 };
 
 socket.onmessage = event => {

@@ -4,7 +4,6 @@ const ws = require('ws')
 const wss = new ws.Server({ noServer: true })
 
 function accept(req, res) {
-    console.log(req.headers)
     const isWebsocket = req.headers.upgrade.toLowerCase() === 'websocket'
     const isUpgradeOrKeepAlive = req.headers.upgrade && req.headers.connection.match(/\bupgrade\b/i)
 

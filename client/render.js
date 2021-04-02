@@ -1,9 +1,10 @@
+const username = prompt('Enter your username: ') || 'Anonymous'
 const form = document.getElementById('send')
 const input = document.getElementById('input')
-const chat = document.getElementById('chat')
+const log = document.getElementById('log')
 
 form.addEventListener('submit', e => {
-    sendMessage(input.value)
+    sendMessage(username + ": " + input.value)
     input.value = ''
     e.preventDefault()
 })
@@ -11,5 +12,5 @@ form.addEventListener('submit', e => {
 function renderMessage(message) {
     const messageElement = document.createElement('li')
     messageElement.innerText = message
-    chat.appendChild(messageElement)
+    log.appendChild(messageElement)
 }
