@@ -2,9 +2,9 @@ const http = require('http')
 const ws = require('ws')
 
 const wss = new ws.Server({ noServer: true })
-const clients = []
 
 function accept(req, res) {
+    console.log(req.headers)
     const isWebsocket = req.headers.upgrade.toLowerCase() === 'websocket'
     const isUpgradeOrKeepAlive = req.headers.upgrade && req.headers.connection.match(/\bupgrade\b/i)
 
@@ -16,15 +16,10 @@ function accept(req, res) {
 }
 
 function onConnect(wsc, ireq) {
-    clients.push(wsc)
     wsc.on('message', message => {
-        distributeMessage(message)
         console.log(message)
+        wss.clients.forEach(c => void c.send(message))
     })
-}
-
-function distributeMessage(message) {
-    clients.forEach(c => void c.send(message))
 }
 
 if (!module.parent) {
