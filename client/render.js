@@ -4,7 +4,7 @@ const input = document.getElementById('input')
 const log = document.getElementById('log')
 
 form.addEventListener('submit', e => {
-    sendMessage(username + ": " + input.value)
+    sendMessage(username + ': ' + input.value)
     input.value = ''
     e.preventDefault()
 })

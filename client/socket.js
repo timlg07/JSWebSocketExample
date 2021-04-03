@@ -1,8 +1,7 @@
-let socket = new WebSocket('ws://localhost:8080')
+const socket = new WebSocket('ws://localhost:8080')
 
 socket.onopen = event => {
     renderMessage('[open] Connection established')
-    renderMessage('Sending to server')
     sendMessage(`${username} connected to the server.`)
 };
 
