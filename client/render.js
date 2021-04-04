@@ -1,16 +1,17 @@
-const username = prompt('Enter your username: ') || 'Anonymous'
-const form = document.getElementById('send')
-const input = document.getElementById('input')
-const log = document.getElementById('log')
-
-form.addEventListener('submit', e => {
-    sendMessage(username + ': ' + input.value)
-    input.value = ''
-    e.preventDefault()
+document.addEventListener('DOMContentLoaded', () => {
+    const username = prompt('Enter your username: ') || 'Anonymous'
+    const log = document.getElementById('log')
+    const client = new Client(username, renderMessage)
+    
+    document.forms.publish.onsubmit = function() {
+        client.sendMessage(this.message.value)
+        this.message.value = ''
+        return false
+    }
+    
+    function renderMessage(message) {
+        const messageElement = document.createElement('li')
+        messageElement.innerText = message
+        log.appendChild(messageElement)
+    }
 })
-
-function renderMessage(message) {
-    const messageElement = document.createElement('li')
-    messageElement.innerText = message
-    log.appendChild(messageElement)
-}

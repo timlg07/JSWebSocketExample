@@ -1,9 +1,16 @@
-Message log:
-<ul id='log'></ul>
-<form id='send'>
-    <input type='text' id='input'>
-    <input type='submit' value='Send Message' >
-</form>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JSWebSocketExample</title>
+        <script src='client.js'></script>
+        <script src='render.js'></script>
+    </head>
 
-<script src='render.js'></script>
-<script src='socket.js'></script>
+    <body>
+        Message log: <ul id='log'></ul>
+        <form name='publish'>
+            <input type='text' name='message'>
+            <input type='submit' value='Send Message' >
+        </form>
+    </body>
+</html>
